@@ -1,8 +1,5 @@
 package com.valentin4311.candycraftmod.world;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.math.BlockPos;
@@ -12,99 +9,89 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class ChunkProviderCandyVoid implements IChunkGenerator
-{
-	private Random rand;
-	private World worldObj;
+import java.util.List;
+import java.util.Random;
 
-	public ChunkProviderCandyVoid(World par1World, long par2)
-	{
-		worldObj = par1World;
-		rand = new Random(par2);
-	}
+public class ChunkProviderCandyVoid implements IChunkGenerator {
+    private Random rand;
+    private World worldObj;
 
-	@Override
-	public Chunk provideChunk(int par1, int par2)
-	{
-		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
-		ChunkPrimer chunkPrimer = new ChunkPrimer();
-		Chunk chunk = new Chunk(worldObj, chunkPrimer, par1, par2);
+    public ChunkProviderCandyVoid(World par1World, long par2) {
+        worldObj = par1World;
+        rand = new Random(par2);
+    }
 
-		return chunk;
-	}
+    @Override
+    public Chunk provideChunk(int par1, int par2) {
+        rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
+        ChunkPrimer chunkPrimer = new ChunkPrimer();
+        Chunk chunk = new Chunk(worldObj, chunkPrimer, par1, par2);
 
-	@Override
-	public boolean chunkExists(int par1, int par2)
-	{
-		return true;
-	}
+        return chunk;
+    }
 
-	@Override
-	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
-	{}
+    @Override
+    public boolean chunkExists(int par1, int par2) {
+        return true;
+    }
 
-	@Override
-	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	{
-		return true;
-	}
+    @Override
+    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
+    }
 
-	@Override
-	public boolean unloadQueuedChunks()
-	{
-		return false;
-	}
+    @Override
+    public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
+        return true;
+    }
 
-	@Override
-	public boolean canSave()
-	{
-		return true;
-	}
+    @Override
+    public boolean unloadQueuedChunks() {
+        return false;
+    }
 
-	@Override
-	public String makeString()
-	{
-		return "RandomLevelSource";
-	}
+    @Override
+    public boolean canSave() {
+        return true;
+    }
 
-	@Override
-	public int getLoadedChunkCount()
-	{
-		return 0;
-	}
+    @Override
+    public String makeString() {
+        return "RandomLevelSource";
+    }
 
-	@Override
-	public void saveExtraData()
-	{}
+    @Override
+    public int getLoadedChunkCount() {
+        return 0;
+    }
 
-	// Load Chunk
-	@Override
-	public Chunk provideChunk(BlockPos pos)
-	{
-		return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4);
-	}
+    @Override
+    public void saveExtraData() {
+    }
 
-	// Unknow
-	@Override
-	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_)
-	{
-		return false;
-	}
+    // Load Chunk
+    @Override
+    public Chunk provideChunk(BlockPos pos) {
+        return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4);
+    }
 
-	// Spawnable creature list
-	@Override
-	public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_)
-	{
-		return null;
-	}
+    // Unknow
+    @Override
+    public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
+        return false;
+    }
 
-	@Override
-	public BlockPos getStrongholdGen(World worldIn, String p_180513_2_, BlockPos p_180513_3_)
-	{
-		return null;
-	}
+    // Spawnable creature list
+    @Override
+    public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_) {
+        return null;
+    }
 
-	@Override
-	public void recreateStructures(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_)
-	{}
+    @Override
+    public BlockPos getStrongholdGen(World worldIn, String p_180513_2_, BlockPos p_180513_3_) {
+        return null;
+    }
+
+    @Override
+    public void recreateStructures(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_) {
+    }
 }

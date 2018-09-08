@@ -1,7 +1,5 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.IBlockState;
@@ -11,31 +9,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyWall extends BlockWall
-{
-	public BlockCandyWall(Block par1Block)
-	{
-		super(par1Block);
-		setDefaultState(blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(VARIANT, BlockWall.EnumType.NORMAL));
-	}
+import java.util.List;
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		return getDefaultState();
-	}
+public class BlockCandyWall extends BlockWall {
+    public BlockCandyWall(Block par1Block) {
+        super(par1Block);
+        setDefaultState(blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(VARIANT, BlockWall.EnumType.NORMAL));
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return 0;
-	}
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState();
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
-	{
-		list.add(new ItemStack(itemIn, 1));
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+        list.add(new ItemStack(itemIn, 1));
+    }
 
 }

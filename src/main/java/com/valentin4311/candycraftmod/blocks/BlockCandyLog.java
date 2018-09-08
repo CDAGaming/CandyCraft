@@ -1,7 +1,5 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.List;
-
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,182 +12,153 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyLog extends BlockLog
-{
-	public static final PropertyEnum properties = PropertyEnum.create("metadata", BlockCandyLog.EnumType.class);
+import java.util.List;
 
-	protected BlockCandyLog()
-	{
-		setDefaultState(blockState.getBaseState().withProperty(properties, BlockCandyLog.EnumType.TYPE0).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
-	}
+public class BlockCandyLog extends BlockLog {
+    public static final PropertyEnum properties = PropertyEnum.create("metadata", BlockCandyLog.EnumType.class);
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		IBlockState iblockstate = getDefaultState().withProperty(properties, BlockCandyLog.EnumType.func_176837_a((meta & 3) % 4));
+    protected BlockCandyLog() {
+        setDefaultState(blockState.getBaseState().withProperty(properties, BlockCandyLog.EnumType.TYPE0).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
+    }
 
-		switch (meta & 12)
-		{
-			case 0:
-				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
-				break;
-			case 4:
-				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
-				break;
-			case 8:
-				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
-				break;
-			default:
-				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
-		}
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        IBlockState iblockstate = getDefaultState().withProperty(properties, BlockCandyLog.EnumType.func_176837_a((meta & 3) % 4));
 
-		return iblockstate;
-	}
+        switch (meta & 12) {
+            case 0:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
+                break;
+            case 4:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+                break;
+            case 8:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+                break;
+            default:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+        }
 
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		byte b0 = 0;
-		int i = b0 | ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta();
+        return iblockstate;
+    }
 
-		switch (BlockCandyLog.SwitchEnumAxis.field_180203_a[state.getValue(LOG_AXIS).ordinal()])
-		{
-			case 1:
-				i |= 4;
-				break;
-			case 2:
-				i |= 8;
-				break;
-			case 3:
-				i |= 12;
-		}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        byte b0 = 0;
+        int i = b0 | ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta();
 
-		return i;
-	}
+        switch (BlockCandyLog.SwitchEnumAxis.field_180203_a[state.getValue(LOG_AXIS).ordinal()]) {
+            case 1:
+                i |= 4;
+                break;
+            case 2:
+                i |= 8;
+                break;
+            case 3:
+                i |= 12;
+        }
 
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer(this, new IProperty[] { properties, LOG_AXIS });
-	}
+        return i;
+    }
 
-	@Override
-	protected ItemStack createStackedBlock(IBlockState state)
-	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta());
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{properties, LOG_AXIS});
+    }
 
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		return ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta();
-	}
+    @Override
+    protected ItemStack createStackedBlock(IBlockState state) {
+        return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta());
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item par1, CreativeTabs tab, List par3List)
-	{
-		par3List.add(new ItemStack(par1, 1, 0));
-		par3List.add(new ItemStack(par1, 1, 1));
-		par3List.add(new ItemStack(par1, 1, 2));
-	}
+    @Override
+    public int damageDropped(IBlockState state) {
+        return ((BlockCandyLog.EnumType) state.getValue(properties)).getMeta();
+    }
 
-	static final class SwitchEnumAxis
-	{
-		static final int[] field_180203_a = new int[BlockLog.EnumAxis.values().length];
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item par1, CreativeTabs tab, List par3List) {
+        par3List.add(new ItemStack(par1, 1, 0));
+        par3List.add(new ItemStack(par1, 1, 1));
+        par3List.add(new ItemStack(par1, 1, 2));
+    }
 
-		static
-		{
-			try
-			{
-				field_180203_a[BlockLog.EnumAxis.X.ordinal()] = 1;
-			}
-			catch (NoSuchFieldError var3)
-			{
-				;
-			}
+    public static enum EnumType implements IStringSerializable {
+        TYPE0(0, "0"), TYPE1(1, "1"), TYPE2(2, "2");
 
-			try
-			{
-				field_180203_a[BlockLog.EnumAxis.Z.ordinal()] = 2;
-			}
-			catch (NoSuchFieldError var2)
-			{
-				;
-			}
+        private static final BlockCandyLog.EnumType[] enumList = new BlockCandyLog.EnumType[values().length];
 
-			try
-			{
-				field_180203_a[BlockLog.EnumAxis.NONE.ordinal()] = 3;
-			}
-			catch (NoSuchFieldError var1)
-			{
-				;
-			}
-		}
-	}
+        static {
+            BlockCandyLog.EnumType[] var0 = values();
+            int var1 = var0.length;
 
-	public static enum EnumType implements IStringSerializable
-	{
-		TYPE0(0, "0"), TYPE1(1, "1"), TYPE2(2, "2");
+            for (int var2 = 0; var2 < var1; ++var2) {
+                BlockCandyLog.EnumType var3 = var0[var2];
+                enumList[var3.getMeta()] = var3;
+            }
+        }
 
-		private static final BlockCandyLog.EnumType[] enumList = new BlockCandyLog.EnumType[values().length];
-		private final int meta;
-		private final String name;
+        private final int meta;
+        private final String name;
 
-		private EnumType(int m, String n)
-		{
-			meta = m;
-			name = n;
-		}
+        private EnumType(int m, String n) {
+            meta = m;
+            name = n;
+        }
 
-		public int getMeta()
-		{
-			return meta;
-		}
+        public static BlockCandyLog.EnumType getState(int meta) {
+            if (meta < 0 || meta >= enumList.length) {
+                meta = 0;
+            }
 
-		public static BlockCandyLog.EnumType getState(int meta)
-		{
-			if (meta < 0 || meta >= enumList.length)
-			{
-				meta = 0;
-			}
+            return enumList[meta];
+        }
 
-			return enumList[meta];
-		}
+        public static BlockCandyLog.EnumType func_176837_a(int p_176837_0_) {
+            if (p_176837_0_ < 0 || p_176837_0_ >= enumList.length) {
+                p_176837_0_ = 0;
+            }
 
-		@Override
-		public String toString()
-		{
-			return name;
-		}
+            return enumList[p_176837_0_];
+        }
 
-		@Override
-		public String getName()
-		{
-			return name;
-		}
+        public int getMeta() {
+            return meta;
+        }
 
-		public static BlockCandyLog.EnumType func_176837_a(int p_176837_0_)
-		{
-			if (p_176837_0_ < 0 || p_176837_0_ >= enumList.length)
-			{
-				p_176837_0_ = 0;
-			}
+        @Override
+        public String toString() {
+            return name;
+        }
 
-			return enumList[p_176837_0_];
-		}
+        @Override
+        public String getName() {
+            return name;
+        }
+    }
 
-		static
-		{
-			BlockCandyLog.EnumType[] var0 = values();
-			int var1 = var0.length;
+    static final class SwitchEnumAxis {
+        static final int[] field_180203_a = new int[BlockLog.EnumAxis.values().length];
 
-			for (int var2 = 0; var2 < var1; ++var2)
-			{
-				BlockCandyLog.EnumType var3 = var0[var2];
-				enumList[var3.getMeta()] = var3;
-			}
-		}
-	}
+        static {
+            try {
+                field_180203_a[BlockLog.EnumAxis.X.ordinal()] = 1;
+            } catch (NoSuchFieldError var3) {
+                ;
+            }
+
+            try {
+                field_180203_a[BlockLog.EnumAxis.Z.ordinal()] = 2;
+            } catch (NoSuchFieldError var2) {
+                ;
+            }
+
+            try {
+                field_180203_a[BlockLog.EnumAxis.NONE.ordinal()] = 3;
+            } catch (NoSuchFieldError var1) {
+                ;
+            }
+        }
+    }
 }

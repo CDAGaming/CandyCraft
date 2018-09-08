@@ -1,9 +1,6 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.Random;
-
 import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -14,59 +11,51 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLollipop extends BlockCandyBush
-{
-	public BlockLollipop()
-	{
-		super();
-	}
+import java.util.Random;
 
-	@Override
-	protected boolean canSustainBush(IBlockState par1)
-	{
-		return par1.getBlock() != Blocks.AIR;
-	}
+public class BlockLollipop extends BlockCandyBush {
+    public BlockLollipop() {
+        super();
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos, world.getBlockState(pos));
-	}
+    @Override
+    protected boolean canSustainBush(IBlockState par1) {
+        return par1.getBlock() != Blocks.AIR;
+    }
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-	{
-		return null;
-	}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos, world.getBlockState(pos));
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+        return null;
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return CCItems.lollipop;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public int quantityDropped(Random par1Random)
-	{
-		return 2 + par1Random.nextInt(2);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return CCItems.lollipop;
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public int quantityDropped(Random par1Random) {
+        return 2 + par1Random.nextInt(2);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 }

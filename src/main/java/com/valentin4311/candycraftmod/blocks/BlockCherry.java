@@ -1,9 +1,6 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.Random;
-
 import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,59 +10,51 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCherry extends Block
-{
-	protected static final AxisAlignedBB CHERRY_AABB = new AxisAlignedBB(0.3F, 0.6F, 0.3F, 0.7F, 1.0F, 0.7F);
+import java.util.Random;
 
-	public BlockCherry(Material material)
-	{
-		super(material);
-	}
+public class BlockCherry extends Block {
+    protected static final AxisAlignedBB CHERRY_AABB = new AxisAlignedBB(0.3F, 0.6F, 0.3F, 0.7F, 1.0F, 0.7F);
 
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
-		return CHERRY_AABB;
-	}
+    public BlockCherry(Material material) {
+        super(material);
+    }
 
-	@Override
-	protected boolean canSilkHarvest()
-	{
-		return true;
-	}
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return CHERRY_AABB;
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    protected boolean canSilkHarvest() {
+        return true;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World par1World, BlockPos pos)
-	{
-		Block i = par1World.getBlockState(pos.up()).getBlock();
-		return i == CCBlocks.candyLeave;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5)
-	{
-		if (!canPlaceBlockAt(par1World, pos))
-		{
-			par1World.setBlockToAir(pos);
-			dropBlockAsItem(par1World, pos, state, 0);
-		}
-	}
+    @Override
+    public boolean canPlaceBlockAt(World par1World, BlockPos pos) {
+        Block i = par1World.getBlockState(pos.up()).getBlock();
+        return i == CCBlocks.candyLeave;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
+        if (!canPlaceBlockAt(par1World, pos)) {
+            par1World.setBlockToAir(pos);
+            dropBlockAsItem(par1World, pos, state, 0);
+        }
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return CCItems.candiedCherry;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return CCItems.candiedCherry;
+    }
 }

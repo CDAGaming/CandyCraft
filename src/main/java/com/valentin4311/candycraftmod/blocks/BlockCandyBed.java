@@ -1,9 +1,6 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.Random;
-
 import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -15,30 +12,27 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyBed extends BlockBed
-{
-	public BlockCandyBed()
-	{
-		super();
-		disableStats();
-	}
+import java.util.Random;
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : CCItems.cottonCandyBed;
-	}
+public class BlockCandyBed extends BlockBed {
+    public BlockCandyBed() {
+        super();
+        disableStats();
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-	{
-		return new ItemStack(CCItems.cottonCandyBed);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : CCItems.cottonCandyBed;
+    }
 
-	@Override
-	public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player)
-	{
-		return true;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        return new ItemStack(CCItems.cottonCandyBed);
+    }
+
+    @Override
+    public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player) {
+        return true;
+    }
 }

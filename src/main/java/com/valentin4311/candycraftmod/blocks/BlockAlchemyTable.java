@@ -1,10 +1,7 @@
 package com.valentin4311.candycraftmod.blocks;
 
-import java.util.Random;
-
 import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityAlchemy;
 import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,138 +18,110 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAlchemyTable extends BlockContainer
-{
-	public BlockAlchemyTable(Material material)
-	{
-		super(material);
-	}
+import java.util.Random;
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (heldItem != null && heldItem.getItem() == CCItems.grenadineBucket)
-		{
-			TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
+public class BlockAlchemyTable extends BlockContainer {
+    public BlockAlchemyTable(Material material) {
+        super(material);
+    }
 
-			if (!table.isTopFilled())
-			{
-				table.setTopFilled(true);
-				player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-				if (worldIn.isRemote)
-				{
-					table.refreshPackets();
-				}
-				return true;
-			}
-			else if (table.getLiquid() < 7)
-			{
-				table.setLiquid(table.getLiquid() + 1);
-				player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-				if (worldIn.isRemote)
-				{
-					table.refreshPackets();
-				}
-				return true;
-			}
-			return false;
-		}
-		else if (heldItem != null && heldItem.getItem() == Items.BUCKET)
-		{
-			TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (heldItem != null && heldItem.getItem() == CCItems.grenadineBucket) {
+            TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
-			if (table.isTopFilled())
-			{
-				table.setTopFilled(false);
-				heldItem.stackSize--;
-				if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket)))
-				{
-					player.dropItem(CCItems.grenadineBucket, 1);
-				}
-				if (worldIn.isRemote)
-				{
-					table.refreshPackets();
-				}
-				return true;
-			}
-			else if (table.getLiquid() > 0)
-			{
-				table.setLiquid(table.getLiquid() - 1);
-				heldItem.stackSize--;
-				if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket)))
-				{
-					player.dropItem(CCItems.grenadineBucket, 1);
-				}
+            if (!table.isTopFilled()) {
+                table.setTopFilled(true);
+                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                if (worldIn.isRemote) {
+                    table.refreshPackets();
+                }
+                return true;
+            } else if (table.getLiquid() < 7) {
+                table.setLiquid(table.getLiquid() + 1);
+                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                if (worldIn.isRemote) {
+                    table.refreshPackets();
+                }
+                return true;
+            }
+            return false;
+        } else if (heldItem != null && heldItem.getItem() == Items.BUCKET) {
+            TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
-				if (worldIn.isRemote)
-				{
-					table.refreshPackets();
-				}
-				return true;
-			}
-			return false;
-		}
-		else if (heldItem != null)
-		{
-			TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
+            if (table.isTopFilled()) {
+                table.setTopFilled(false);
+                heldItem.stackSize--;
+                if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket))) {
+                    player.dropItem(CCItems.grenadineBucket, 1);
+                }
+                if (worldIn.isRemote) {
+                    table.refreshPackets();
+                }
+                return true;
+            } else if (table.getLiquid() > 0) {
+                table.setLiquid(table.getLiquid() - 1);
+                heldItem.stackSize--;
+                if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket))) {
+                    player.dropItem(CCItems.grenadineBucket, 1);
+                }
 
-			if (table.isTopFilled() && table.addPotionToRecipes(heldItem))
-			{
-				if (heldItem.getItem() != CCItems.caramelBucket)
-				{
-					heldItem.stackSize--;
-				}
-				else
-				{
-					player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-				}
-				table.refreshPackets();
-				return true;
-			}
+                if (worldIn.isRemote) {
+                    table.refreshPackets();
+                }
+                return true;
+            }
+            return false;
+        } else if (heldItem != null) {
+            TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
-			return false;
-		}
-		return false;
-	}
+            if (table.isTopFilled() && table.addPotionToRecipes(heldItem)) {
+                if (heldItem.getItem() != CCItems.caramelBucket) {
+                    heldItem.stackSize--;
+                } else {
+                    player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                }
+                table.refreshPackets();
+                return true;
+            }
 
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
-	{
-		return new TileEntityAlchemy();
-	}
+            return false;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public TileEntity createNewTileEntity(World var1, int var2) {
+        return new TileEntityAlchemy();
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.SOLID;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random random)
-	{
-		TileEntityAlchemy table = (TileEntityAlchemy) world.getTileEntity(pos);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.SOLID;
+    }
 
-		for (int l = 0; l < table.getIngredientsCount() * 2; ++l)
-		{
-			double d0 = pos.getX() + random.nextFloat() / 2;
-			double d1 = pos.getY() + random.nextFloat();
-			double d2 = pos.getZ() + random.nextFloat() / 2;
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random random) {
+        TileEntityAlchemy table = (TileEntityAlchemy) world.getTileEntity(pos);
 
-			world.spawnParticle(EnumParticleTypes.SPELL_MOB, d0 + 0.25d, d1 + 0.8d, d2 + 0.25d, random.nextDouble(), random.nextDouble(), random.nextDouble());
-		}
-	}
+        for (int l = 0; l < table.getIngredientsCount() * 2; ++l) {
+            double d0 = pos.getX() + random.nextFloat() / 2;
+            double d1 = pos.getY() + random.nextFloat();
+            double d2 = pos.getZ() + random.nextFloat() / 2;
+
+            world.spawnParticle(EnumParticleTypes.SPELL_MOB, d0 + 0.25d, d1 + 0.8d, d2 + 0.25d, random.nextDouble(), random.nextDouble(), random.nextDouble());
+        }
+    }
 }

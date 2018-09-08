@@ -1,19 +1,6 @@
 package com.valentin4311.candycraftmod.misc;
 
-import java.util.ArrayList;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.items.CCItems;
-
-import net.minecraft.advancements.Advancement;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-public class CCAdvancements
-{
+public class CCAdvancements {
 	/*
 	private static ArrayList<Advancement> achievementList = new ArrayList<Advancement>();
 	public static AchievementPage achievementPage;

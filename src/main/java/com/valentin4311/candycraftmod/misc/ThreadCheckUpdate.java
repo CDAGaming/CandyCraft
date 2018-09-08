@@ -1,99 +1,80 @@
 package com.valentin4311.candycraftmod.misc;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.valentin4311.candycraftmod.CandyCraft;
+import com.valentin4311.candycraftmod.event.ClientTick;
+import net.minecraft.client.Minecraft;
+
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.event.ClientTick;
+public class ThreadCheckUpdate extends Thread {
+    String V = "";
+    String MC = "";
+    String W = "";
 
-import net.minecraft.client.Minecraft;
+    @Override
+    public void run() {
+        try {
+            if (CandyCraftPreferences.checkForUpdates) {
+                File file = new File(Minecraft.getMinecraft().gameDir + "/config/CandyCraft/");
+                file.mkdirs();
 
-public class ThreadCheckUpdate extends Thread
-{
-	String V = "";
-	String MC = "";
-	String W = "";
+                downloadFile("http://candyversion.tumblr.com/", file.getAbsolutePath() + "/version.txt");
 
-	@Override
-	public void run()
-	{
-		try
-		{
-			if (CandyCraftPreferences.checkForUpdates)
-			{
-				File file = new File(Minecraft.getMinecraft().gameDir + "/config/CandyCraft/");
-				file.mkdirs();
+                writeDecoded(file);
+                analyse(file.getAbsolutePath() + "/version.txt");
 
-				downloadFile("http://candyversion.tumblr.com/", file.getAbsolutePath() + "/version.txt");
+                if (!CandyCraft.VERSION.equals(V) && !CandyCraft.VERSION.contains("inconnu") && !CandyCraft.VERSION.contains("null")) {
+                    CandyCraft.setShouldUpdate(true);
+                    ClientTick.version = V;
+                    ClientTick.mcVersion = MC;
+                    ClientTick.words = W;
+                }
+                ClientTick.threadFinished = true;
+            } else {
+                CandyCraft.setShouldUpdate(false);
+                ClientTick.threadFinished = true;
+            }
+        } catch (Exception e) {
+            CandyCraft.setShouldUpdate(false);
+            ClientTick.threadFinished = true;
+        }
+    }
 
-				writeDecoded(file);
-				analyse(file.getAbsolutePath() + "/version.txt");
+    private void writeDecoded(File file) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath() + "/version.txt"));
 
-				if (!CandyCraft.VERSION.equals(V) && !CandyCraft.VERSION.contains("inconnu") && !CandyCraft.VERSION.contains("null"))
-				{
-					CandyCraft.setShouldUpdate(true);
-					ClientTick.version = V;
-					ClientTick.mcVersion = MC;
-					ClientTick.words = W;
-				}
-				ClientTick.threadFinished = true;
-			}
-			else
-			{
-				CandyCraft.setShouldUpdate(false);
-				ClientTick.threadFinished = true;
-			}
-		}
-		catch (Exception e)
-		{
-			CandyCraft.setShouldUpdate(false);
-			ClientTick.threadFinished = true;
-		}
-	}
+        String text = "";
+        for (String line; (line = br.readLine()) != null; ) {
+            text += line;
+        }
+        String[] table = text.split("%%%");
 
-	private void writeDecoded(File file) throws Exception
-	{
-		BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath() + "/version.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsolutePath() + "/version.txt"));
+        writer.write(table[1]);
+        writer.close();
+        br.close();
+    }
 
-		String text = "";
-		for (String line; (line = br.readLine()) != null;)
-		{
-			text += line;
-		}
-		String[] table = text.split("%%%");
+    private void analyse(String str) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(str));
+        String version = br.readLine();
+        String[] table = version.split("\\|\\/\\|");
+        V = table[0];
+        MC = table[1];
+        W = table[2];
+        br.close();
+        new File(str).delete();
+    }
 
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsolutePath() + "/version.txt"));
-		writer.write(table[1]);
-		writer.close();
-		br.close();
-	}
-
-	private void analyse(String str) throws Exception
-	{
-		BufferedReader br = new BufferedReader(new FileReader(str));
-		String version = br.readLine();
-		String[] table = version.split("\\|\\/\\|");
-		V = table[0];
-		MC = table[1];
-		W = table[2];
-		br.close();
-		new File(str).delete();
-	}
-
-	private void downloadFile(String url, String location) throws Exception
-	{
-		URL website;
-		website = new URL(url);
-		ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-		FileOutputStream fos = new FileOutputStream(location);
-		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-		fos.close();
-	}
+    private void downloadFile(String url, String location) throws Exception {
+        URL website;
+        website = new URL(url);
+        ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+        FileOutputStream fos = new FileOutputStream(location);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        fos.close();
+    }
 }

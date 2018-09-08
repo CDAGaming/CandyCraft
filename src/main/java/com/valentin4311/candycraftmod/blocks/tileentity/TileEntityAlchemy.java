@@ -1,10 +1,7 @@
 package com.valentin4311.candycraftmod.blocks.tileentity;
 
-import java.util.ArrayList;
-
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -16,162 +13,137 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityAlchemy extends TileEntity
-{
-	private int liquidQuantity = 0;
-	private boolean topFilled = false;
-	private ArrayList<ItemStack> recipes = new ArrayList<ItemStack>();
+import java.util.ArrayList;
 
-	public boolean isTopFilled()
-	{
-		return topFilled;
-	}
+public class TileEntityAlchemy extends TileEntity {
+    private int liquidQuantity = 0;
+    private boolean topFilled = false;
+    private ArrayList<ItemStack> recipes = new ArrayList<ItemStack>();
 
-	public void setTopFilled(boolean i)
-	{
-		topFilled = i;
-	}
+    public boolean isTopFilled() {
+        return topFilled;
+    }
 
-	public int getLiquid()
-	{
-		return liquidQuantity;
-	}
+    public void setTopFilled(boolean i) {
+        topFilled = i;
+    }
 
-	public void setLiquid(int i)
-	{
-		liquidQuantity = i;
-	}
+    public int getLiquid() {
+        return liquidQuantity;
+    }
 
-	public boolean addPotionToRecipes(ItemStack stack)
-	{
-		if (stack != null && !worldObj.isRemote)
-		{
-			if (AlchemyRecipes.recipeList.containsKey(stack.getItem()))
-			{
-				recipes.add(stack);
+    public void setLiquid(int i) {
+        liquidQuantity = i;
+    }
 
-				if (recipes.size() >= 4)
-				{
-					float f = 0.7F;
-					double d0 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-					double d1 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
-					double d2 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-					ItemStack itemstack1 = new ItemStack(CCItems.sugarPill);
+    public boolean addPotionToRecipes(ItemStack stack) {
+        if (stack != null && !worldObj.isRemote) {
+            if (AlchemyRecipes.recipeList.containsKey(stack.getItem())) {
+                recipes.add(stack);
 
-					String meta = "";
+                if (recipes.size() >= 4) {
+                    float f = 0.7F;
+                    double d0 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+                    double d1 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
+                    double d2 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+                    ItemStack itemstack1 = new ItemStack(CCItems.sugarPill);
 
-					for (ItemStack st : recipes)
-					{
-						if (st != null)
-						{
-							String id = String.valueOf(Potion.getIdFromPotion(AlchemyRecipes.getMobEffectsIdForItem(st)));
-							if (id.length() < 2)
-							{
-								id = "0" + id;
-							}
-							meta += id;
-						}
-					}
-					int i = Integer.valueOf(meta);
-					itemstack1.setItemDamage(i);
-					itemstack1.setTagCompound(new NBTTagCompound());
-					itemstack1.getTagCompound().setInteger("MetaSystem", i);
+                    String meta = "";
 
-					EntityItem entityitem = new EntityItem(worldObj, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, itemstack1);
-					entityitem.setPickupDelay(10);
-					worldObj.spawnEntityInWorld(entityitem);
-					setTopFilled(false);
-					if (getLiquid() > 0)
-					{
-						setLiquid(getLiquid() - 1);
-						setTopFilled(true);
-					}
-					recipes.clear();
-					refreshPackets();
-				}
+                    for (ItemStack st : recipes) {
+                        if (st != null) {
+                            String id = String.valueOf(Potion.getIdFromPotion(AlchemyRecipes.getMobEffectsIdForItem(st)));
+                            if (id.length() < 2) {
+                                id = "0" + id;
+                            }
+                            meta += id;
+                        }
+                    }
+                    int i = Integer.valueOf(meta);
+                    itemstack1.setItemDamage(i);
+                    itemstack1.setTagCompound(new NBTTagCompound());
+                    itemstack1.getTagCompound().setInteger("MetaSystem", i);
 
-				return true;
-			}
-			return false;
-		}
-		return false;
-	}
+                    EntityItem entityitem = new EntityItem(worldObj, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, itemstack1);
+                    entityitem.setPickupDelay(10);
+                    worldObj.spawnEntityInWorld(entityitem);
+                    setTopFilled(false);
+                    if (getLiquid() > 0) {
+                        setLiquid(getLiquid() - 1);
+                        setTopFilled(true);
+                    }
+                    recipes.clear();
+                    refreshPackets();
+                }
 
-	public void refreshPackets()
-	{
-		TileEntityAlchemy newTable = new TileEntityAlchemy();
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-		writeToNBT(nbttagcompound);
-		newTable.readFromNBT(nbttagcompound);
-		worldObj.setBlockState(pos, Blocks.STONE.getDefaultState());
-		worldObj.setBlockState(pos, CCBlocks.alchemyTable.getDefaultState());
-		worldObj.setTileEntity(pos, newTable);
-	}
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
-	public int getIngredientsCount()
-	{
-		return recipes.size();
-	}
+    public void refreshPackets() {
+        TileEntityAlchemy newTable = new TileEntityAlchemy();
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        writeToNBT(nbttagcompound);
+        newTable.readFromNBT(nbttagcompound);
+        worldObj.setBlockState(pos, Blocks.STONE.getDefaultState());
+        worldObj.setBlockState(pos, CCBlocks.alchemyTable.getDefaultState());
+        worldObj.setTileEntity(pos, newTable);
+    }
 
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.getNbtCompound());
-	}
+    public int getIngredientsCount() {
+        return recipes.size();
+    }
 
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setInteger("liquidAmount", getLiquid());
-		par1NBTTagCompound.setBoolean("isTopFilled", isTopFilled());
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        readFromNBT(pkt.getNbtCompound());
+    }
 
-		for (int i = 0; i < 4; i++)
-		{
-			try
-			{
-				if (recipes.get(i) != null)
-				{
-					par1NBTTagCompound.setTag("StackContent" + i, recipes.get(i).writeToNBT(new NBTTagCompound()));
-				}
-			}
-			catch (Exception e)
-			{
-				// TODO WTF
-			}
-		}
-		return par1NBTTagCompound;
-	}
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("liquidAmount", getLiquid());
+        par1NBTTagCompound.setBoolean("isTopFilled", isTopFilled());
 
-	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.readFromNBT(par1NBTTagCompound);
-		setLiquid(par1NBTTagCompound.getInteger("liquidAmount"));
-		setTopFilled(par1NBTTagCompound.getBoolean("isTopFilled"));
+        for (int i = 0; i < 4; i++) {
+            try {
+                if (recipes.get(i) != null) {
+                    par1NBTTagCompound.setTag("StackContent" + i, recipes.get(i).writeToNBT(new NBTTagCompound()));
+                }
+            } catch (Exception e) {
+                // TODO WTF
+            }
+        }
+        return par1NBTTagCompound;
+    }
 
-		recipes.clear();
-		for (int i = 0; i < 4; i++)
-		{
-			if (par1NBTTagCompound.hasKey("StackContent" + i) && par1NBTTagCompound.getCompoundTag("StackContent" + i) != null)
-			{
-				recipes.add(ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("StackContent" + i)));
-			}
-		}
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readFromNBT(par1NBTTagCompound);
+        setLiquid(par1NBTTagCompound.getInteger("liquidAmount"));
+        setTopFilled(par1NBTTagCompound.getBoolean("isTopFilled"));
 
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-		writeToNBT(nbttagcompound);
-		return new SPacketUpdateTileEntity(pos, 1, nbttagcompound);
-	}
+        recipes.clear();
+        for (int i = 0; i < 4; i++) {
+            if (par1NBTTagCompound.hasKey("StackContent" + i) && par1NBTTagCompound.getCompoundTag("StackContent" + i) != null) {
+                recipes.add(ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("StackContent" + i)));
+            }
+        }
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public double getMaxRenderDistanceSquared()
-	{
-		return 4096.0D * 2;
-	}
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        writeToNBT(nbttagcompound);
+        return new SPacketUpdateTileEntity(pos, 1, nbttagcompound);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public double getMaxRenderDistanceSquared() {
+        return 4096.0D * 2;
+    }
 }
