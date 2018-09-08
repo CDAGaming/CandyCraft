@@ -45,8 +45,8 @@ public class ItemCandyBed extends Item
 				pos = pos.up();
 			}
 
-			int i = MathHelper.floor_double(playerIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-			EnumFacing enumfacing1 = EnumFacing.getHorizontal(i);
+			int i = MathHelper.floor(playerIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			EnumFacing enumfacing1 = EnumFacing.byHorizontalIndex(i);
 			BlockPos blockpos1 = pos.offset(enumfacing1);
 			boolean flag1 = block.isReplaceable(worldIn, blockpos1);
 			boolean flag2 = worldIn.isAirBlock(pos) || flag;

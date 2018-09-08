@@ -1,7 +1,7 @@
 package com.valentin4311.candycraftmod.items;
 
 import com.valentin4311.candycraftmod.entity.EntityCandyCreeper;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +30,7 @@ public class ItemLollipop extends ItemFood
 			{
 				if (par2EntityLiving instanceof EntityCandyCreeper)
 				{
-					par2EntityPlayer.addStat(CCAchievements.lollipopCreep);
+					par2EntityPlayer.addStat(CCAdvancements.lollipopCreep);
 				}
 				par2EntityLiving.heal(1);
 			}

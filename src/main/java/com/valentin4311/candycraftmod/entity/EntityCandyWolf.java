@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAgeable;
@@ -156,7 +156,7 @@ public class EntityCandyWolf extends EntityWolf
 				}
 				else if (var2.getItem() == CCItems.lollipop)
 				{
-					par1EntityPlayer.addStat(CCAchievements.lollipopHeal);
+					par1EntityPlayer.addStat(CCAdvancements.lollipopHeal);
 					return false;
 				}
 				else if (var2.getItem() == Items.BUCKET && getFurTime() < 1)
@@ -171,7 +171,7 @@ public class EntityCandyWolf extends EntityWolf
 						{
 							par1EntityPlayer.dropItem(new ItemStack(CCItems.caramelBucket, 1, 0), false);
 						}
-						par1EntityPlayer.addStat(CCAchievements.caramelAch);
+						par1EntityPlayer.addStat(CCAdvancements.caramelAch);
 						setFurTime(worldObj.rand.nextInt(12000) + 5000);
 					}
 					return true;
@@ -265,7 +265,7 @@ public class EntityCandyWolf extends EntityWolf
 						aiSit.setSitting(true);
 						setHealth(20);
 						setOwnerId(par1EntityPlayer.getUniqueID());
-						par1EntityPlayer.addStat(CCAchievements.dogTaming);
+						par1EntityPlayer.addStat(CCAdvancements.dogTaming);
 						playTameEffect(true);
 						worldObj.setEntityState(this, (byte) 7);
 					}

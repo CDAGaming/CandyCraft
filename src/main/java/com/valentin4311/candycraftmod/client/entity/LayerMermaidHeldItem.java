@@ -31,7 +31,7 @@ public class LayerMermaidHeldItem<RendererLivingEntity> implements LayerRenderer
 		{
 			GlStateManager.pushMatrix();
 
-			((ModelMermaid) entityRenderer.getMainModel()).Shape41.postRender(0.0625F);
+			((ModelMermaid) entityRenderer).Shape41.postRender(0.0625F);
 			GlStateManager.translate(0.0275F, 0.1225F, 0.1425F);
 
 			Item item = itemstack.getItem();

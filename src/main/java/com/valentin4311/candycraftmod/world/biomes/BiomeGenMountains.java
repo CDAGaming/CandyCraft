@@ -1,13 +1,8 @@
-package com.valentin4311.candycraft.world.biomes;
+package com.valentin4311.candycraftmod.world.biomes;
 
 import java.awt.Color;
 
-import com.valentin4311.candycraft.entity.EntityBunny;
-import com.valentin4311.candycraft.entity.EntityCandyPig;
-import com.valentin4311.candycraft.entity.EntityCandyWolf;
-import com.valentin4311.candycraft.entity.EntitySuguard;
-import com.valentin4311.candycraft.entity.EntityWaffleSheep;
-
+import com.valentin4311.candycraftmod.entity.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

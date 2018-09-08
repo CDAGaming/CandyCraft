@@ -2,7 +2,7 @@ package com.valentin4311.candycraftmod.items;
 
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFactory;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 import com.valentin4311.candycraftmod.misc.CCEnchantments;
 
 import net.minecraft.block.Block;
@@ -48,7 +48,7 @@ public class ItemFork extends Item
 				player.worldObj.setBlockToAir(pos);
 				itemstack.setItemDamage(itemstack.getItemDamage() - 1);
 				player.getFoodStats().addStats(1, 0.0F);
-				player.addStat(CCAchievements.eatBlock);
+				player.addStat(CCAdvancements.eatBlock);
 			}
 			return false;
 		}

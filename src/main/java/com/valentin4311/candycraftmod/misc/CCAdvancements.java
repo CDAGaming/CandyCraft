@@ -5,46 +5,46 @@ import java.util.ArrayList;
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.items.CCItems;
 
+import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.AchievementPage;
 
-public class CCAchievements
+public class CCAdvancements
 {
-	private static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
+	/*
+	private static ArrayList<Advancement> achievementList = new ArrayList<Advancement>();
 	public static AchievementPage achievementPage;
-	public static Achievement craftSugarBlock;
-	public static Achievement enterCandyWorld;
-	public static Achievement gettingCandyCaneSugar;
-	public static Achievement gettingLicorice;
-	public static Achievement dogTaming;
-	public static Achievement caramelAch;
-	public static Achievement candyCaneFence;
-	public static Achievement forkWork;
-	public static Achievement dragibusFarm;
-	public static Achievement licoriceFurnace;
-	public static Achievement craftJelly;
-	public static Achievement craftJellyShock;
-	public static Achievement craftLicoriceSword;
-	public static Achievement killCookieCreeper;
-	public static Achievement killSuguard;
-	public static Achievement killQueenSlime;
-	public static Achievement craftCandyStick;
-	public static Achievement lollipopFarm;
-	public static Achievement lollipopHeal;
-	public static Achievement lollipopCreep;
-	public static Achievement craftStick;
-	public static Achievement craftSugarFactory;
-	public static Achievement craftHoneyComb;
-	public static Achievement craftHoneyCombSword;
-	public static Achievement killSuguardBoss;
-	public static Achievement eatBlock;
-	public static Achievement craftCoins;
-	public static Achievement openWiki;
+	public static Advancement craftSugarBlock;
+	public static Advancement enterCandyWorld;
+	public static Advancement gettingCandyCaneSugar;
+	public static Advancement gettingLicorice;
+	public static Advancement dogTaming;
+	public static Advancement caramelAch;
+	public static Advancement candyCaneFence;
+	public static Advancement forkWork;
+	public static Advancement dragibusFarm;
+	public static Advancement licoriceFurnace;
+	public static Advancement craftJelly;
+	public static Advancement craftJellyShock;
+	public static Advancement craftLicoriceSword;
+	public static Advancement killCookieCreeper;
+	public static Advancement killSuguard;
+	public static Advancement killQueenSlime;
+	public static Advancement craftCandyStick;
+	public static Advancement lollipopFarm;
+	public static Advancement lollipopHeal;
+	public static Advancement lollipopCreep;
+	public static Advancement craftStick;
+	public static Advancement craftSugarFactory;
+	public static Advancement craftHoneyComb;
+	public static Advancement craftHoneyCombSword;
+	public static Advancement killSuguardBoss;
+	public static Advancement eatBlock;
+	public static Advancement craftCoins;
+	public static Advancement openWiki;
 
 	public static void init()
 	{
@@ -77,15 +77,15 @@ public class CCAchievements
 		craftCoins = setAchievement("craftChocolateCoins", -4, -4, new ItemStack(CCItems.chocolateCoin), craftSugarFactory, false);
 		openWiki = setAchievement("openWiki", 0, -2, new ItemStack(CCItems.wiki), null, true);
 
-		Achievement[] array = new Achievement[achievementList.size()];
+		Advancement[] array = new Achievement[achievementList.size()];
 		achievementList.toArray(array);
 		achievementPage = new AchievementPage("\247k||\247r \247cC\247fa\247cn\247fd\247cy\247fC\247cr\247fa\247cf\247ft \247k||\247r", array);
 		AchievementPage.registerAchievementPage(achievementPage);
 	}
 
-	private static Achievement setAchievement(String balise, int x, int y, ItemStack item, Achievement req, boolean special)
+	private static Advancement setAchievement(String balise, int x, int y, ItemStack item, Advancement req, boolean special)
 	{
-		Achievement ach = new Achievement("candycraftmod:" + balise, balise, x, y, item, req);
+		Advancement ach = new Achievement("candycraftmod:" + balise, balise, x, y, item, req);
 		if (special)
 		{
 			ach.setSpecial();
@@ -100,39 +100,39 @@ public class CCAchievements
 
 		if (item == Item.getItemFromBlock(CCBlocks.sugarBlock))
 		{
-			player.addStat(CCAchievements.craftSugarBlock);
+			player.addStat(CCAdvancements.craftSugarBlock);
 		}
 		else if (item == Item.getItemFromBlock(CCBlocks.candyCaneFence))
 		{
-			player.addStat(CCAchievements.candyCaneFence);
+			player.addStat(CCAdvancements.candyCaneFence);
 		}
 		else if (item == CCItems.fork)
 		{
-			player.addStat(CCAchievements.forkWork);
+			player.addStat(CCAdvancements.forkWork);
 		}
 		else if (item == Item.getItemFromBlock(CCBlocks.sugarFurnace))
 		{
-			player.addStat(CCAchievements.licoriceFurnace);
+			player.addStat(CCAdvancements.licoriceFurnace);
 		}
 		else if (item == CCItems.licoriceSword)
 		{
-			player.addStat(CCAchievements.craftLicoriceSword);
+			player.addStat(CCAdvancements.craftLicoriceSword);
 		}
 		else if (item == CCItems.marshmallowStick)
 		{
-			player.addStat(CCAchievements.craftCandyStick);
+			player.addStat(CCAdvancements.craftCandyStick);
 		}
 		else if (item == Items.STICK && stack.stackSize == 1)
 		{
-			player.addStat(CCAchievements.craftStick);
+			player.addStat(CCAdvancements.craftStick);
 		}
 		else if (item == Item.getItemFromBlock(CCBlocks.sugarFactory))
 		{
-			player.addStat(CCAchievements.craftSugarFactory);
+			player.addStat(CCAdvancements.craftSugarFactory);
 		}
 		else if (item == CCItems.honeySword)
 		{
-			player.addStat(CCAchievements.craftHoneyCombSword);
+			player.addStat(CCAdvancements.craftHoneyCombSword);
 		}
 	}
 
@@ -141,15 +141,15 @@ public class CCAchievements
 		Item item = stack.getItem();
 		if (item == CCItems.licorice)
 		{
-			player.addStat(CCAchievements.gettingLicorice);
+			player.addStat(CCAdvancements.gettingLicorice);
 		}
 		if (item == Item.getItemFromBlock(CCBlocks.trampojelly))
 		{
-			player.addStat(CCAchievements.craftJelly);
+			player.addStat(CCAdvancements.craftJelly);
 		}
 		if (item == Item.getItemFromBlock(CCBlocks.jellyShockAbsorber))
 		{
-			player.addStat(CCAchievements.craftJellyShock);
+			player.addStat(CCAdvancements.craftJellyShock);
 		}
 	}
 
@@ -160,7 +160,7 @@ public class CCAchievements
 
 		if (item == CCItems.candyCane)
 		{
-			player.addStat(CCAchievements.gettingCandyCaneSugar);
+			player.addStat(CCAdvancements.gettingCandyCaneSugar);
 		}
-	}
+	}*/
 }

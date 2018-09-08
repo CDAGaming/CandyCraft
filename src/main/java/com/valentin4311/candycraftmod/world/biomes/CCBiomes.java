@@ -1,7 +1,7 @@
-package com.valentin4311.candycraft.world.biomes;
+package com.valentin4311.candycraftmod.world.biomes;
 
-import com.valentin4311.candycraft.CandyCraft;
-
+import com.valentin4311.candycraftmod.CandyCraft;
+import com.valentin4311.candycraftmod.world.biomes.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;

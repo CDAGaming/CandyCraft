@@ -1,8 +1,8 @@
 package com.valentin4311.candycraftmod.client;
 
+import com.valentin4311.candycraftmod.CommonProxy;
 import org.lwjgl.input.Keyboard;
 
-import com.valentin4311.candycraftmod.CommonProxy;
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityAlchemy;
 import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityCandyChest;
@@ -167,7 +167,7 @@ public class ClientProxy extends CommonProxy
 		rm.entityRenderMap.put(EntityMermaid.class, new RenderMermaid(rm));
 
 		TileEntityCandyChestRenderer render = new TileEntityCandyChestRenderer();
-		TileEntityRendererDispatcher.instance.mapSpecialRenderers.put(TileEntityCandyChest.class, render);
+		TileEntityRendererDispatcher.instance.renderers.put(TileEntityCandyChest.class, render);
 		render.setRendererDispatcher(TileEntityRendererDispatcher.instance);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTeleporter.class, new TileEntityRendererTeleporter());
@@ -219,7 +219,7 @@ public class ClientProxy extends CommonProxy
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack)
 			{
-				return new ModelResourceLocation("candycraftmod:" + CCItems.candyPlacer.getUnlocalizedName().substring(5), "inventory");
+				return new ModelResourceLocation("candycraftmod:" + CCItems.candyPlacer.getUnlocalizedNameInefficiently(stack).substring(5), "inventory");
 			}
 		});
 
@@ -247,7 +247,7 @@ public class ClientProxy extends CommonProxy
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack)
 			{
-				return new ModelResourceLocation("candycraftmod:" + CCItems.sugarPill.getUnlocalizedName().substring(5), "inventory");
+				return new ModelResourceLocation("candycraftmod:" + CCItems.sugarPill.getUnlocalizedNameInefficiently(stack).substring(5), "inventory");
 			}
 		});
 	}

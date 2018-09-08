@@ -11,7 +11,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
 import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.CandyCraftPreferences;
 import com.valentin4311.candycraftmod.event.ClientTick;
 
 import net.minecraft.client.Minecraft;
@@ -29,7 +28,7 @@ public class ThreadCheckUpdate extends Thread
 		{
 			if (CandyCraftPreferences.checkForUpdates)
 			{
-				File file = new File(Minecraft.getMinecraft().mcDataDir + "/config/CandyCraft/");
+				File file = new File(Minecraft.getMinecraft().gameDir + "/config/CandyCraft/");
 				file.mkdirs();
 
 				downloadFile("http://candyversion.tumblr.com/", file.getAbsolutePath() + "/version.txt");

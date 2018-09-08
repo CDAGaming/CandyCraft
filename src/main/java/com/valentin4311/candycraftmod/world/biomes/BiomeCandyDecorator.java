@@ -127,7 +127,7 @@ public class BiomeCandyDecorator
 			WorldGenerator worldgenerator = biome.genBigTreeChance(randomGenerator);
 			worldgenerator.setDecorationDefaults();
 			BlockPos h = currentWorld.getHeight(new BlockPos(k, 0, l));
-			if (currentWorld.getBiomeGenForCoords(h) instanceof BiomeGenSkyMountains || h.getY() < 120)
+			if (currentWorld.getBiome(h) instanceof BiomeGenSkyMountains || h.getY() < 120)
 			{
 				worldgenerator.generate(currentWorld, randomGenerator, h);
 			}

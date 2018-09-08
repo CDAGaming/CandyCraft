@@ -4,10 +4,10 @@ import java.util.Random;
 
 import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityEgg;
 
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +26,7 @@ public class RenderEgg extends TileEntitySpecialRenderer
 	protected void renderLight(TileEntityEgg var1, float par2)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldrenderer = tessellator.getBuffer();
+		BufferBuilder worldrenderer = tessellator.getBuffer();
 		RenderHelper.disableStandardItemLighting();
 		float f = (200 - var1.timeLeft + par2) / 200.0F;
 		float f1 = 0.0F;

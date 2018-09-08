@@ -52,7 +52,7 @@ public class TileEntityCandyChestRenderer extends TileEntityChestRenderer
 	{
 		int j;
 
-		if (!p_180538_1_.hasWorldObj())
+		if (!p_180538_1_.hasWorld())
 		{
 			j = 0;
 		}

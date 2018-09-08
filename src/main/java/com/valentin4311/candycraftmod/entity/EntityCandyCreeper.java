@@ -1,7 +1,7 @@
 package com.valentin4311.candycraftmod.entity;
 
 import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -127,7 +127,7 @@ public class EntityCandyCreeper extends EntityCreeper
 		ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 		if (!worldObj.isRemote && var2 != null && var2.getItem() == CCItems.lollipop && !isExploding)
 		{
-			par1EntityPlayer.addStat(CCAchievements.lollipopCreep);
+			par1EntityPlayer.addStat(CCAdvancements.lollipopCreep);
 			isExploding = true;
 			counter = 60;
 			return true;

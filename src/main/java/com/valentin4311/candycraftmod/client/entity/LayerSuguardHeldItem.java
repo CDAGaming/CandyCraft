@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class LayerSuguardHeldItem<RendererLiving> implements LayerRenderer
 {
-	private final RendererLivingEntity entityRenderer;
+	private final RendererLiving entityRenderer;
 
 	public LayerSuguardHeldItem(RendererLiving renderer)
 	{
@@ -31,7 +31,7 @@ public class LayerSuguardHeldItem<RendererLiving> implements LayerRenderer
 		{
 			GlStateManager.pushMatrix();
 
-			((ModelSuguard) entityRenderer.getMainModel()).rightArm.postRender(0.0625F);
+			((ModelSuguard) entityRenderer).rightArm.postRender(0.0625F);
 			GlStateManager.translate(0.0275F, 0.1225F, 0.1425F);
 
 			Item item = itemstack.getItem();

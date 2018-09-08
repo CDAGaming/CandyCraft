@@ -1,10 +1,11 @@
 package com.valentin4311.candycraftmod.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -31,19 +32,19 @@ public class WikiCommand implements ICommand
 	}
 
 	@Override
-	public String getCommandName()
+	public String getName()
 	{
 		return "candywiki";
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender p_71518_1_)
+	public String getUsage(ICommandSender p_71518_1_)
 	{
 		return "/candywiki";
 	}
 
 	@Override
-	public List getCommandAliases()
+	public List getAliases()
 	{
 		return aliases;
 	}
@@ -59,17 +60,17 @@ public class WikiCommand implements ICommand
 			{
 				if (player.inventory.addItemStackToInventory(new ItemStack(CCItems.wiki)))
 				{
-					player.addChatMessage(new TextComponentString("\247a" + new TextComponentTranslation("chat.wikiOk").getUnformattedText()));
-					player.addStat(CCAchievements.openWiki);
+					player.sendMessage(new TextComponentString("\247a" + new TextComponentTranslation("chat.wikiOk").getUnformattedText()));
+					//player.addStat(CCAdvancements.openWiki);
 				}
 				else
 				{
-					player.addChatMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiRoom").getUnformattedText()));
+					player.sendMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiRoom").getUnformattedText()));
 				}
 			}
 			else
 			{
-				player.addChatMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiFail").getUnformattedText()));
+				player.sendMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiFail").getUnformattedText()));
 			}
 		}
 	}
@@ -81,9 +82,9 @@ public class WikiCommand implements ICommand
 	}
 
 	@Override
-	public List getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
+	public List getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
 	{
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override

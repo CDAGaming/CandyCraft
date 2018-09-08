@@ -11,7 +11,7 @@ import com.valentin4311.candycraftmod.entity.boss.EntityBossSuguard;
 import com.valentin4311.candycraftmod.entity.boss.EntityJellyQueen;
 import com.valentin4311.candycraftmod.items.CCItems;
 import com.valentin4311.candycraftmod.items.ItemBossKey;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockJukebox;
@@ -98,13 +98,13 @@ public class ServerEventCatcher
 	@SubscribeEvent
 	public void onCraft(ItemCraftedEvent event)
 	{
-		CCAchievements.onCraft(event.crafting, event.player);
+		CCAdvancements.onCraft(event.crafting, event.player);
 	}
 
 	@SubscribeEvent
 	public void onSmelt(ItemSmeltedEvent event)
 	{
-		CCAchievements.onSmelt(event.smelting, event.player);
+		CCAdvancements.onSmelt(event.smelting, event.player);
 	}
 
 	@SubscribeEvent
@@ -207,13 +207,13 @@ public class ServerEventCatcher
 		{
 			if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 			{
-				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAchievements.killCookieCreeper);
+				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAdvancements.killCookieCreeper);
 			}
 			if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 			{
 				if (((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity != null && ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity instanceof EntityPlayer)
 				{
-					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAchievements.killCookieCreeper);
+					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAdvancements.killCookieCreeper);
 				}
 			}
 		}
@@ -221,13 +221,13 @@ public class ServerEventCatcher
 		{
 			if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 			{
-				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAchievements.killSuguard);
+				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAdvancements.killSuguard);
 			}
 			if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 			{
 				if (((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity != null && ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity instanceof EntityPlayer)
 				{
-					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAchievements.killSuguard);
+					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAdvancements.killSuguard);
 				}
 			}
 		}
@@ -235,13 +235,13 @@ public class ServerEventCatcher
 		{
 			if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 			{
-				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAchievements.killQueenSlime);
+				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAdvancements.killQueenSlime);
 			}
 			if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 			{
 				if (((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity != null && ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity instanceof EntityPlayer)
 				{
-					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAchievements.killQueenSlime);
+					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAdvancements.killQueenSlime);
 				}
 			}
 		}
@@ -249,13 +249,13 @@ public class ServerEventCatcher
 		{
 			if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 			{
-				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAchievements.killSuguardBoss);
+				((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAdvancements.killSuguardBoss);
 			}
 			if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 			{
 				if (((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity != null && ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity instanceof EntityPlayer)
 				{
-					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAchievements.killSuguardBoss);
+					((EntityPlayer) ((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity).addStat(CCAdvancements.killSuguardBoss);
 				}
 			}
 		}
@@ -264,7 +264,7 @@ public class ServerEventCatcher
 	@SubscribeEvent
 	public void onPickup(EntityItemPickupEvent event)
 	{
-		CCAchievements.onPickup(event.getItem(), event.getEntityPlayer());
+		CCAdvancements.onPickup(event.getItem(), event.getEntityPlayer());
 	}
 
 	@SubscribeEvent

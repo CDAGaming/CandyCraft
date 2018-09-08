@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
@@ -44,7 +44,7 @@ public class TeleporterCandy extends Teleporter
 		{
 			if (worldServerInstance.provider.getDimension() == CandyCraft.getCandyDimensionID() && par1Entity != null && par1Entity instanceof EntityPlayer)
 			{
-				((EntityPlayer) par1Entity).addStat(CCAchievements.enterCandyWorld);
+				((EntityPlayer) par1Entity).addStat(CCAdvancements.enterCandyWorld);
 			}
 		}
 		int i = MathHelper.floor_double(par1Entity.posX);

@@ -1,4 +1,4 @@
-package com.valentin4311.candycraft;
+package com.valentin4311.candycraftmod;
 
 import java.io.File;
 

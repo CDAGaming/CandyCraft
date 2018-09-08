@@ -1,7 +1,7 @@
 package com.valentin4311.candycraftmod.items;
 
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +29,7 @@ public class ItemCandySeeds extends Item
 
 			if (soil == i1 && world.isAirBlock(pos.up()))
 			{
-				player.addStat(CCAchievements.lollipopFarm);
+				player.addStat(CCAdvancements.lollipopFarm);
 				world.setBlockState(pos.up(), CCBlocks.lollipopPlant.getDefaultState(), 3);
 				--itemstack.stackSize;
 				return EnumActionResult.SUCCESS;

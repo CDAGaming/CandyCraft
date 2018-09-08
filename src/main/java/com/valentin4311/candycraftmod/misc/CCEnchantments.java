@@ -1,4 +1,4 @@
-package com.valentin4311.candycraft.misc;
+package com.valentin4311.candycraftmod.misc;
 
 import com.valentin4311.candycraft.CandyCraft;
 

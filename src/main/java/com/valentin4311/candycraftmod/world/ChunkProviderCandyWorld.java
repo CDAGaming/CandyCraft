@@ -7,7 +7,6 @@ import java.util.Random;
 
 import com.valentin4311.candycraftmod.CandyCraftPreferences;
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
 import com.valentin4311.candycraftmod.world.generator.MapGenCandyRavine;
 import com.valentin4311.candycraftmod.world.generator.WorldGenCandyHouse;
 import com.valentin4311.candycraftmod.world.generator.WorldGenChewingGumTotem;
@@ -32,14 +31,8 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderSettings;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.NoiseGenerator;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -93,7 +86,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 		{
 			for (int k = -2; k <= 2; ++k)
 			{
-				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 		}
@@ -116,7 +109,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 
 	public void func_180518_a(int p_180518_1_, int p_180518_2_, ChunkPrimer p_180518_3_)
 	{
-		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, p_180518_1_ * 4 - 2, p_180518_2_ * 4 - 2, 10, 10);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomesForGeneration(biomesForGeneration, p_180518_1_ * 4 - 2, p_180518_2_ * 4 - 2, 10, 10);
 		func_147423_a(p_180518_1_ * 4, 0, p_180518_2_ * 4);
 
 		for (int k = 0; k < 4; ++k)
@@ -333,7 +326,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 					double d2 = field_147428_e[l] / settings.lowerLimitScale;
 					double d3 = field_147425_f[l] / settings.upperLimitScale;
 					double d4 = (field_147427_d[l] / 10.0D + 1.0D) / 2.0D;
-					double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
+					double d5 = MathHelper.clamp(d2, d3, d4) - d1;
 
 					if (j2 > 29)
 					{
@@ -355,7 +348,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 		int k = p_73153_2_ * 16;
 		int l = p_73153_3_ * 16;
 		BlockPos blockpos = new BlockPos(k, 0, l);
-		Biome biomegenbase = worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		Biome biomegenbase = worldObj.getBiome(blockpos.add(16, 0, 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -448,7 +441,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 			l1 = rand.nextInt(60) + 120;
 			i2 = l + 8;
 
-			Chunk ch = worldObj.getChunkFromBlockCoords(new BlockPos(k1, 0, i2));
+			Chunk ch = worldObj.getChunk(new BlockPos(k1, 0, i2));
 
 			if (CandyCraftPreferences.generateFloatingIsland && biomegenbase != CCBiomes.candyHellMountains && WorldProviderCandy.canGenIsland <= 0)
 			{
@@ -522,7 +515,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator
 	@Override
 	public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_)
 	{
-		Biome biomegenbase = worldObj.getBiomeGenForCoords(p_177458_2_);
+		Biome biomegenbase = worldObj.getBiome(p_177458_2_);
 		return biomegenbase.getSpawnableList(p_177458_1_);
 	}
 

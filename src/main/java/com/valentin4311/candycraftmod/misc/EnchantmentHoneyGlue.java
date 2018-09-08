@@ -1,8 +1,8 @@
-package com.valentin4311.candycraft.misc;
+package com.valentin4311.candycraftmod.misc;
 
 import com.valentin4311.candycraft.CandyCraft;
-import com.valentin4311.candycraft.items.CCItems;
 
+import com.valentin4311.candycraftmod.items.CCItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;

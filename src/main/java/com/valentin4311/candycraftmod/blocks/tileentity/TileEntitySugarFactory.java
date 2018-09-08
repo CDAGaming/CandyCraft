@@ -6,7 +6,7 @@ import java.util.Map;
 import com.valentin4311.candycraftmod.CandyCraft;
 import com.valentin4311.candycraftmod.blocks.CCBlocks;
 import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
+import com.valentin4311.candycraftmod.misc.CCAdvancements;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -189,11 +189,11 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
 	{
 		if (par1EntityPlayer != null && FactoryItemStacks[1] != null && FactoryItemStacks[1].getItem() == CCItems.honeycomb)
 		{
-			par1EntityPlayer.addStat(CCAchievements.craftHoneyComb);
+			par1EntityPlayer.addStat(CCAdvancements.craftHoneyComb);
 		}
 		if (par1EntityPlayer != null && FactoryItemStacks[1] != null && FactoryItemStacks[1].getItem() == CCItems.chocolateCoin)
 		{
-			par1EntityPlayer.addStat(CCAchievements.craftCoins);
+			par1EntityPlayer.addStat(CCAdvancements.craftCoins);
 		}
 		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}

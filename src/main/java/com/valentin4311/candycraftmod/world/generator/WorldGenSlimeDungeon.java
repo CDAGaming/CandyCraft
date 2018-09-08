@@ -485,7 +485,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 						Entity slime;
 						slime = new EntityTornadoJelly(world);
 						slime.setLocationAndAngles((double) x + i - 12 + 0.5, (double) y + j + 0.5, (double) z - k - 1 + 0.5, MathHelper.wrapDegrees(random.nextFloat() * 360.0F), 0.0F);
-						world.spawnEntityInWorld(slime);
+						world.spawnEntity(slime);
 					}
 				}
 				water = !water;
@@ -721,7 +721,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 		EntityPEZJelly slime = new EntityPEZJelly(world);
 		slime.setPosition(x + 1, y + 2, z - 12);
 		slime.setJellySize(10);
-		world.spawnEntityInWorld(slime);
+		world.spawnEntity(slime);
 		posX += 24;
 	}
 
@@ -776,7 +776,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 		slime.sY = y + 2;
 		slime.sZ = z - 25;
 		slime.setPosition(x + 1, y + 2, z - 25);
-		world.spawnEntityInWorld(slime);
+		world.spawnEntity(slime);
 		posX += 49;
 	}
 
@@ -821,7 +821,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 			fork.addEnchantment(Enchantments.EFFICIENCY, 5);
 			ItemStack bow = new ItemStack(CCItems.caramelBow, 1);
 			bow.addEnchantment(Enchantments.POWER, 4);
-			bow.addEnchantment(CCEnchantments.honeyGlue, 2);
+			bow.addEnchantment(CCEnchantments.honey_glue, 2);
 			for (int i = 0; i < chest.getSizeInventory(); i++)
 			{
 				ItemStack[] rewards = { new ItemStack(CCItems.sugarCrystal, random.nextInt(8) + 4), new ItemStack(CCItems.licorice, random.nextInt(14) + 8), new ItemStack(CCItems.candyCane, random.nextInt(8) + 3), new ItemStack(CCItems.chocolateCoin, random.nextInt(40) + 16), new ItemStack(CCItems.jumpWand, 1), new ItemStack(CCItems.jellyWand, 1), new ItemStack(CCBlocks.sugarBlock, random.nextInt(7) + 3), new ItemStack(CCItems.PEZ, random.nextInt(12) + 4), new ItemStack(CCItems.gummy, random.nextInt(12) + 6), fork, bow, new ItemStack(CCBlocks.sugarFactory, random.nextInt(2) + 1), new ItemStack(CCItems.lollipopSeeds, random.nextInt(12) + 6), new ItemStack(CCItems.cottonCandy, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryFishCooked, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryScale, random.nextInt(3) + 6), new ItemStack(CCBlocks.dragonEggBlock, 1) };

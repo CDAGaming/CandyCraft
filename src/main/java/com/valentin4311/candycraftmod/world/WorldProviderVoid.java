@@ -1,7 +1,6 @@
 package com.valentin4311.candycraftmod.world;
 
 import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
@@ -9,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +28,7 @@ public class WorldProviderVoid extends WorldProvider
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProviderCandyVoid(worldObj, worldObj.getSeed());
+		return new ChunkProviderCandyVoid(world, world.getSeed());
 	}
 
 	@Override
